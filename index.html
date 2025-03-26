@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Queco - Tu bot omnicanal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      background: #F2EFE7;
+      color: #000;
+      line-height: 1.6;
+    }
+
+    header {
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #F2EFE7;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    nav a {
+      color: #000;
+      margin-left: 1.5rem;
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #00775c;
+    }
+
+    .hero {
+      padding: 6rem 2rem;
+      text-align: center;
+      background: #F2EFE7;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      font-size: 1.2rem;
+      color: #333;
+    }
+
+    .btn-primary {
+      background: #00ffcc;
+      color: #000;
+      border: none;
+      padding: 0.8rem 2rem;
+      font-size: 1rem;
+      font-weight: 700;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .btn-primary:hover {
+      background: #00ccaa;
+    }
+
+    .top-section {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 4rem 2rem;
+      background: #F2EFE7;
+      flex-grow: 1;
+    }
+
+    .feature {
+        background: #fff;
+        padding: 1.5rem;
+        border-radius: 1rem;
+        text-align: center;
+        border: 1px solid #ccc;
+        color: #000;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+
+    .feature h3 {
+      margin-bottom: 1rem;
+    }
+
+    .cta {
+      background: #ffe;
+      color: #000;
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .cta h2 {
+      margin-bottom: 1rem;
+    }
+
+    .footer {
+      background: #F2EFE7;
+      padding: 2rem;
+      text-align: center;
+      color: #444;
+      font-size: 0.9rem;
+    }
+
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .menu-toggle span {
+      height: 3px;
+      width: 25px;
+      background: #000;
+      margin: 4px 0;
+      transition: 0.3s;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+        flex-direction: column;
+        background: #F2EFE7;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        width: 100%;
+        text-align: right;
+        padding: 1rem 2rem;
+      }
+
+      nav.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: flex;
+      }
+    }
+
+  </style>
+</head>  
+<body>
+  <div class="top-section">
+    <header>
+      <div class="logo">queco</div>
+      <nav>
+        <a href="#">Inicio</a>
+        <a href="#features">Características</a>
+        <a href="#contacto">Contacto</a>
+      </nav>
+      <div class="menu-toggle" id="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </header>
+
+    <section class="hero">
+      <h1>Conectá tu negocio con queco bot</h1>
+      <p>El bot omnicanal que gestiona reservas, ventas y atención al cliente por <span id="dynamic-text">WhatsApp</span>.</p>
+      <button class="btn-primary">Quiero conocer más</button>
+    </section>
+
+    <section class="features" id="features">
+      <div class="feature">
+        <h3>Reservas automatizadas</h3>
+        <p>Tu agenda al día sin esfuerzo. queco responde y agenda por vos.</p>
+      </div>
+      <div class="feature">
+        <h3>Ventas inteligentes</h3>
+        <p>Responde consultas, ofrece productos y cierra ventas en segundos.</p>
+      </div>
+      <div class="feature">
+        <h3>Gestión de clientes</h3>
+        <p>Segmentá, respondé y fidelizá. Todo desde un solo lugar.</p>
+      </div>
+    </section>
+  </div>
+
+  <section class="cta" id="contacto">
+    <h2>¿Listo para transformar tu negocio?</h2>
+    <p>Contactanos y empecemos hoy.</p>
+    <button class="btn-primary">Hablá con queco</button>
+  </section>
+
+  <footer class="footer">
+    &copy; 2025 queco. Todos los derechos reservados.
+  </footer>
+
+  <script>
+    const words = ["WhatsAppp", "Instagramm", "Messengerr", "Telegramm"];
+    const textEl = document.getElementById("dynamic-text");
+    let wordIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+
+    function typeEffect() {
+      const currentWord = words[wordIndex];
+      if (deleting) {
+        charIndex--;
+        if (charIndex <= 0) {
+          deleting = false;
+          wordIndex = (wordIndex + 1) % words.length;
+        }
+      } else {
+        charIndex++;
+        if (charIndex === currentWord.length) {
+          deleting = true;
+          setTimeout(typeEffect, 2000);
+          return;
+        }
+      }
+
+      textEl.textContent = currentWord.substring(0, charIndex);
+      setTimeout(typeEffect, deleting ? 50 : 100);
+    }
+
+    typeEffect();
+  </script>
+  <script>
+    document.querySelectorAll('button').forEach(btn => {
+      btn.addEventListener('click', () => alert('¡Gracias por tu interés en queco bot!'));
+    });
+
+    const toggle = document.getElementById('menu-toggle');
+    const nav = document.querySelector('nav');
+
+    toggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+    });
+  </script>
+</body>
+</html>
